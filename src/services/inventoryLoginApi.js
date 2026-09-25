@@ -26,6 +26,7 @@ export async function postLogin(username, password) {
             payload?.message || 'Something went wrong logging in.'
         );
     }
-
+    console.log("potaka", payload.data)
+    console.log("potaka", payload.data.user.username)
     return payload.data;
 }

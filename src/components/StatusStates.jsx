@@ -32,3 +32,13 @@ export function ErrorState({ message }) {
     </div>
   );
 }
+
+export function LoginState({data}) {
+  console.log("potakatalaga", data)
+  return (
+    <div className="animate-panel-in rounded-md border border-green-400/30 bg-green-400/5 px-6 py-8 text-center">
+      <p className="font-mono text-xs uppercase tracking-widest text-amber-400">Login successful!</p>
+      <p className="mt-2 text-sm text-slate-400">Welcome {data.user.username}</p>
+    </div>
+  );
+}

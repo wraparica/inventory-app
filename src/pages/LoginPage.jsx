@@ -1,6 +1,6 @@
 import LoginComponent from '../components/LoginComponent';
 import { useLogin } from '../hooks/useLogin';
-import { EmptyState, LoadingState, ErrorState } from '../components/StatusStates';
+import { EmptyState, LoadingState, ErrorState, LoginState } from '../components/StatusStates';
 
 
 export default function LoginPage() {
@@ -33,6 +33,11 @@ export default function LoginPage() {
                     {status === "error" && (
                         <ErrorState message={error} />
                     )}
+
+                    {status === "success" && (
+                        <LoginState data={data} />
+                    )}
+                    
 
                 </div>
             </div>
