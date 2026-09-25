@@ -26,8 +26,8 @@ export default function LoginComponent({ isLoading, onLogin }) {
                     className="min-w-0 flex-1 rounded-md border border-[#253241]
                    bg-[#101820] px-4 py-3 font-sans text-sm text-slate-100
                    placeholder:text-slate-500 outline-none transition-colors
-                   duration-200 focus:border-amber-400/60
-                   focus:ring-2 focus:ring-amber-400/10"
+                   duration-200 focus:border-cyan-400/60
+                   focus:ring-2 focus:ring-cyan-400/10"
                 />
 
                 <input
@@ -39,19 +39,19 @@ export default function LoginComponent({ isLoading, onLogin }) {
                     className="min-w-0 flex-1 rounded-md border border-[#253241]
                    bg-[#101820] px-4 py-3 font-sans text-sm text-slate-100
                    placeholder:text-slate-500 outline-none transition-colors
-                   duration-200 focus:border-amber-400/60
-                   focus:ring-2 focus:ring-amber-400/10"
+                   duration-200 focus:border-cyan-400/60
+                   focus:ring-2 focus:ring-cyan-400/10"
                 />
 
                 <button
                     type="submit"
                     disabled={isLoading || !username.trim() || !password.trim()}
-                    className="shrink-0 rounded-md border border-amber-400/40
-                   bg-amber-400/10 px-4 py-3 font-mono text-xs uppercase
-                   tracking-widest text-amber-400 transition-all duration-200
-                   hover:border-amber-400/60 hover:bg-amber-400/20
+                    className="shrink-0 rounded-md border border-cyan-400/40
+                   bg-cyan-400/10 px-4 py-3 font-mono text-xs uppercase
+                   tracking-widest text-cyan-400 transition-all duration-200
+                   hover:border-cyan-400/60 hover:bg-cyan-400/20
                    active:scale-[0.97] disabled:cursor-not-allowed
-                   disabled:opacity-40 disabled:hover:bg-amber-400/10
+                   disabled:opacity-40 disabled:hover:bg-cyan-400/10
                    sm:px-5"
                 >
                     Login
@@ -61,7 +61,7 @@ export default function LoginComponent({ isLoading, onLogin }) {
                     type="button"
                     onClick={() => navigate('/register')}
                     className="px-4 py-3 font-mono text-xs uppercase
-                   tracking-widest text-amber-400 transition-all duration-200"
+                   tracking-widest text-cyan-400 transition-all duration-200"
                 >
                     Register
                 </button>

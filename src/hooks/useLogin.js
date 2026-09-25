@@ -15,7 +15,6 @@ export function useLogin() {
 
     try {
       const result = await postLogin(username.trim(), password.trim());
-      console.log("pota", result)
       setData(result)
       setStatus('success');
     } catch (err) {

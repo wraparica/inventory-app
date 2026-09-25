@@ -16,7 +16,6 @@ export function useRegister() {
 
         try {
             const result = await postRegister(email.trim(), username.trim(), password.trim());
-            console.log("pota", result)
             setData(result)
             setStatus('success');
         } catch (err) {
