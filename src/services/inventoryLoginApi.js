@@ -1,4 +1,4 @@
-const CURRENCY_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'inventory-app-backend-production-3919.up.railway.app';
+const CURRENCY_BASE_URL = import.meta.env.VITE_API_BASE_URL ||  'https://inventory-app-backend-production-3919.up.railway.app';
 
 export async function postLogin(username, password) {
     const url = `${CURRENCY_BASE_URL}/api/login`;
