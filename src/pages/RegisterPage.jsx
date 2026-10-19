@@ -3,6 +3,7 @@ import { useRegister } from '../hooks/useRegister';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/div.css';
+import { LoadingState, ErrorState } from '../components/StatusStates';
 
 export default function RegisterPage() {
     const navigate = useNavigate();
@@ -34,7 +35,16 @@ export default function RegisterPage() {
                     </h1>
                 </header>
 
-                <RegisterComponent isLoading={false} onRegister={register} />
+                <RegisterComponent isLoading={status === "loading"} onRegister={register} />
+                <div className="mt-6">
+
+                    {(status === "loading") && <LoadingState />}
+
+                    {status === "error" && (
+                        <ErrorState message={error} />
+                    )}
+
+                </div>
             </div>
 
         </div>
