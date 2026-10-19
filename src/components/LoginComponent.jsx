@@ -7,6 +7,7 @@ export default function LoginComponent({ isLoading, onLogin }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
     function handleSubmit(e) {
         e.preventDefault();
         onLogin(username, password);
@@ -28,14 +29,25 @@ export default function LoginComponent({ isLoading, onLogin }) {
                     className="form-input"
                 />
 
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Password"
-                    aria-label="Password"
-                    className="form-input"
-                />
+                <div className="password-field">
+                    <input
+                        type={showPassword ? 'text' : 'password'}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Password"
+                        aria-label="Password"
+                        className="form-input"
+                    />
+
+                    <button
+                        type="button"
+                        className="password-toggle"
+                        onClick={() => setShowPassword((prev) => !prev)}
+                        aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    >
+                        {showPassword ? 'Hide' : 'Show'}
+                    </button>
+                </div>
 
                 <button
                     type="submit"

@@ -14,7 +14,7 @@ export default function RegisterComponent({ isLoading, onRegister }) {
     const [email, setEmail] = useState('');
     const [errors, setErrors] = useState({});
     const passwordRules = validatePassword(password);
-
+    const [showPassword, setShowPassword] = useState(false);
     function handleSubmit(e) {
         e.preventDefault();
         onRegister(email, username, password);
@@ -96,11 +96,11 @@ export default function RegisterComponent({ isLoading, onRegister }) {
                     </p>
                 )}
 
-                <input
-                    type="password"
-                    value={password}
-                    onChange={
-                        (e) => {
+                <div className="password-field">
+                    <input
+                        type={showPassword ? 'text' : 'password'}
+                        value={password}
+                        onChange={(e) => {
                             setPassword(e.target.value);
 
                             if (errors.password) {
@@ -109,21 +109,30 @@ export default function RegisterComponent({ isLoading, onRegister }) {
                                     password: '',
                                 }));
                             }
-                        }
-                    }
-                    onBlur={() => {
-                        if (!passwordRules.isValid) {
-                            setErrors((prev) => ({
-                                ...prev,
-                                password: 'Password does not meet all requirements.',
-                            }));
-                        }
-                    }}
-                    placeholder="Password"
-                    aria-label="Password"
-                    className="form-input"
-                />
+                        }}
+                        onBlur={() => {
+                            if (!passwordRules.isValid) {
+                                setErrors((prev) => ({
+                                    ...prev,
+                                    password: 'Password does not meet all requirements.',
+                                }));
+                            }
+                        }}
+                        placeholder="Password"
+                        aria-label="Password"
+                        className="form-input"
+                    />
 
+                    <button
+                        type="button"
+                        className="password-toggle"
+                        onClick={() => setShowPassword((prev) => !prev)}
+                        aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    >
+                        {showPassword ? 'Hide' : 'Show'}
+                    </button>
+                </div>
+                
                 {errors.password && (
                     <p id="email-error" className="error-panel-title" role="alert">
                         {errors.password}
