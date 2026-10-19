@@ -21,7 +21,6 @@ export default function LoginPage() {
                     <p className="page-header-label">
                         Inventory
                     </p>
-
                     <h1 className="page-header-title">
                         Login
                     </h1>
