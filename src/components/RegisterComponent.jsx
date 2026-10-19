@@ -121,7 +121,7 @@ export default function RegisterComponent({ isLoading, onRegister }) {
                 {errors.username && (
                     <p
                         id="username-error"
-                        className="validation-error"
+                        className="error-panel-title"
                         role="alert"
                     >
                         {errors.username}
@@ -149,7 +149,7 @@ export default function RegisterComponent({ isLoading, onRegister }) {
                 {errors.email && (
                     <p
                         id="email-error"
-                        className="validation-error"
+                        className="error-panel-title"
                         role="alert"
                     >
                         {errors.email}
@@ -186,16 +186,18 @@ export default function RegisterComponent({ isLoading, onRegister }) {
                         {showPassword ? 'Hide' : 'Show'}
                     </button>
 
-                    {errors.password && (
+                    
+                </div>
+
+                {errors.password && (
                         <p
                             id="password-error"
-                            className="validation-error"
+                            className="error-panel-title"
                             role="alert"
                         >
                             {errors.password}
                         </p>
                     )}
-                </div>
 
                 <PasswordRequirements passwordRules={passwordRules} />
 
