@@ -19,9 +19,10 @@ const menuItems = [
     { name: "UOM", icon: Ruler, path: "/items" },
     { name: "Settings", icon: Settings, path: "/settings" },
 ];
+import { useAuth } from "../auth/AuthContext";
 
 export default function SidePanel({ isOpen, setIsOpen, onLogout }) {
-
+    const { user } = useAuth();
     return (
         <>
             {/* Mobile toggle */}
@@ -57,8 +58,8 @@ export default function SidePanel({ isOpen, setIsOpen, onLogout }) {
                             Welcome
                         </p>
 
-                        <h1 className="font-serif text-3xl text-slate-50 sm:text-4xl">
-                            Dashboard
+                        <h1 className="font-serif text-3xl text-slate-50 sm:text-4xl uppercase">
+                            {user?.username ?? "User"}
                         </h1>
                     </header>
                 </div>

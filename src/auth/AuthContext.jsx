@@ -5,6 +5,7 @@ const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
     const [accessToken, setAccessToken] = useState(null);
+    const [user, setUser] = useState(null);
 
     async function logout() {
         console.log("Logout function called");
@@ -17,11 +18,20 @@ export function AuthProvider({ children }) {
             throw error;
         } finally {
             setAccessToken(null);
+            setUser(null);
         }
     }
 
     return (
-        <AuthContext.Provider value={{ accessToken, setAccessToken, logout }}>
+        <AuthContext.Provider
+            value={{
+                accessToken,
+                setAccessToken,
+                user,
+                setUser,
+                logout,
+            }}
+        >
             {children}
         </AuthContext.Provider>
     );
