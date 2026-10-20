@@ -4,20 +4,23 @@ import {
     X,
     LayoutDashboard,
     Package,
-    Tags,
-    Users,
+    Grid,
+    Tag,
+    Ruler,
     Settings,
     LogOut,
 } from "lucide-react";
 
 const menuItems = [
     { name: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
-    { name: "Products", icon: Package, path: "/login" },
-    { name: "Categories", icon: Tags, path: "/categories" },
+    { name: "Products", icon: Package, path: "/products" },
+    { name: "Categories", icon: Grid, path: "/categories" },
+    { name: "Brands", icon: Tag, path: "/items" },
+    { name: "UOM", icon: Ruler, path: "/items" },
     { name: "Settings", icon: Settings, path: "/settings" },
 ];
 
-export default function SidePanel({ isOpen, setIsOpen }) {
+export default function SidePanel({ isOpen, setIsOpen, onLogout }) {
 
     return (
         <>
@@ -85,10 +88,7 @@ export default function SidePanel({ isOpen, setIsOpen }) {
                 {/* Logout */}
                 <div className="border-t border-slate-700 p-4">
                     <button
-                        onClick={() => {
-                            localStorage.removeItem("token");
-                            window.location.href = "/login";
-                        }}
+                        onClick={onLogout}
                         className="flex w-full items-center gap-3
               rounded-lg px-4 py-3 text-slate-300
               transition hover:bg-red-500/10

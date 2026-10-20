@@ -11,7 +11,7 @@ export default function LoginPage() {
     useEffect(() => {
             if (status === 'success') {
                 navigate('/dashboard', {
-                    state: { data },
+                     replace: true ,
                 });
             }
         }, [status, navigate]);

@@ -1,17 +1,20 @@
-import DashboardComponent from '../components/Dashboard/DashboardComponent';
-import { EmptyState, LoadingState, ErrorState, LoginState } from '../components/StatusStates';
 import SidePanel from '../components/SidePanel';
-import { useLocation, Navigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from 'react';
+import { useAuth } from "../auth/AuthContext";
+import { useNavigate } from 'react-router-dom';
 
 
 export default function DashboardPage() {
-    const data = location.state?.data;
+    const navigate = useNavigate();
+    const { logout } = useAuth();
     const [isOpen, setIsOpen] = useState(
         () => window.matchMedia("(min-width: 1024px)").matches
     );
-
+    async function handleLogout() {
+        await logout();
+        navigate("/login", { replace: true });
+    }
     useEffect(() => {
         const mediaQuery = window.matchMedia("(min-width: 1024px)");
 
@@ -38,19 +41,21 @@ export default function DashboardPage() {
 
 
             <div className="min-h-screen">
-                <SidePanel isOpen={isOpen} setIsOpen={setIsOpen} />
+                <SidePanel isOpen={isOpen} setIsOpen={setIsOpen} onLogout={handleLogout} />
 
                 <main
                     className={`min-h-screen p-6 pt-20 transition-all duration-300 ${isOpen ? "ml-64" : "ml-0"
                         }`}
                 >
                     <h1 className="text-2xl font-bold text-white">
-                        Dashboard Content
+
+                        Inventory Dashboard
                     </h1>
 
-                    <p className="mt-4 text-slate-400">
-                        This content expands when the sidebar closes.
+                    <p className="text-slate-400">
+                        Inventory management system overview and insights
                     </p>
+
                 </main>
             </div>
 
