@@ -1,15 +1,15 @@
 
 import { useState } from 'react';
-
-import '../styles/common.css';
-import '../styles/div.css';
+import TextInput from "../Ui/TextInput";
+import FormError from "../Ui/FormError";
+import Button from "../Ui/Button";
 
 import {
     validateEmail,
     validatePassword,
-} from '../utils/validation';
+} from '../../utils/validation';
 
-import { PasswordRequirements } from '../components/PasswordRequirements';
+import { PasswordRequirements } from '../PasswordRequirements';
 
 export default function RegisterComponent({ isLoading, onRegister }) {
     const [form, setForm] = useState({
@@ -101,63 +101,55 @@ export default function RegisterComponent({ isLoading, onRegister }) {
             <div className="flex w-full flex-col gap-3 sm:flex-col sm:items-center-flex">
 
                 {/* Username */}
-                <input
+                <TextInput
                     type="text"
                     name="username"
                     value={form.username}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     placeholder="Username"
-                    aria-label="Username"
+                    ariaLabel="Username"
                     aria-invalid={Boolean(errors.username)}
                     aria-describedby={
-                        errors.username ? 'username-error' : undefined
+                        errors.username ? "username-error" : undefined
                     }
                     autoComplete="username"
-                    className="form-input"
                     required
                 />
 
                 {errors.username && (
-                    <p
-                        id="username-error"
-                        className="error-panel-title"
-                        role="alert"
-                    >
+                    <FormError id="username-error">
                         {errors.username}
-                    </p>
+                    </FormError>
                 )}
 
+
+
                 {/* Email */}
-                <input
+                <TextInput
                     type="email"
                     name="email"
                     value={form.email}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     placeholder="Email"
-                    aria-label="Email"
-                    aria-invalid={Boolean(errors.email)}
+                    ariaLabel="Email"
+                    aria-invalid={Boolean(errors.username)}
                     aria-describedby={
-                        errors.email ? 'email-error' : undefined
+                        errors.username ? "username-error" : undefined
                     }
                     autoComplete="email"
-                    className="form-input"
                     required
                 />
 
                 {errors.email && (
-                    <p
-                        id="email-error"
-                        className="error-panel-title"
-                        role="alert"
-                    >
+                    <FormError id="email-error">
                         {errors.email}
-                    </p>
+                    </FormError>
                 )}
 
                 {/* Password */}
-                <div className="password-field">
+                <div className="relative">
                     <input
                         type={showPassword ? 'text' : 'password'}
                         name="password"
@@ -171,44 +163,47 @@ export default function RegisterComponent({ isLoading, onRegister }) {
                             errors.password ? 'password-error' : undefined
                         }
                         autoComplete="new-password"
-                        className="form-input"
+                        className="w-full rounded-md border border-[#253241]
+                   bg-[#101820] py-3 pl-4 pr-16 font-sans text-sm
+                   text-slate-100 placeholder:text-slate-500
+                   outline-none transition-colors duration-200
+                   focus:border-cyan-400/60
+                   focus:ring-2 focus:ring-cyan-400/10"
                         required
                     />
 
+
+
                     <button
                         type="button"
-                        className="password-toggle"
+                        className="absolute inset-y-0 right-3 flex items-center
+                   text-sm text-slate-400 transition-colors
+                   hover:text-cyan-400"
                         onClick={() => setShowPassword((prev) => !prev)}
-                        aria-label={
-                            showPassword ? 'Hide password' : 'Show password'
-                        }
+                        aria-label={showPassword ? "Hide password" : "Show password"}
                     >
-                        {showPassword ? 'Hide' : 'Show'}
+                        {showPassword ? "Hide" : "Show"}
                     </button>
 
-                    
+
                 </div>
 
                 {errors.password && (
-                        <p
-                            id="password-error"
-                            className="error-panel-title"
-                            role="alert"
-                        >
-                            {errors.password}
-                        </p>
-                    )}
+                    <FormError id="password-error">
+                        {errors.password}
+                    </FormError>
+                )}
 
                 <PasswordRequirements passwordRules={passwordRules} />
 
                 {/* Submit */}
-                <button
+                <Button
                     type="submit"
+                    variant="outline"
                     disabled={isLoading || !isFormValid}
-                    className="submit-button"
                 >
-                    {isLoading ? 'Registering...' : 'Register'}
-                </button>
+                    {isLoading ? "Registering..." : "Register"}
+                </Button>
 
             </div>
         </form>

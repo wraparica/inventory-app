@@ -1,4 +1,5 @@
-import { EmptyState, LoadingState, ErrorState } from './components/StatusStates';
+
+import DashboardPage from './pages/DashboardPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 
@@ -10,6 +11,7 @@ export default function App() {
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
 
         <Route path="/" element={<Navigate to="/login" replace />} />
       </Routes>
