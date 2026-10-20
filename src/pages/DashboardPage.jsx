@@ -44,8 +44,7 @@ export default function DashboardPage() {
                 <SidePanel isOpen={isOpen} setIsOpen={setIsOpen} onLogout={handleLogout} />
 
                 <main
-                    className={`min-h-screen p-6 pt-20 transition-all duration-300 ${isOpen ? "ml-64" : "ml-0"
-                        }`}
+                    className={`min-h-screen p-6 pt-20 transition-all duration-300 ml-20`}
                 >
                     <h1 className="text-2xl font-bold text-white">
 
