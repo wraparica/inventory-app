@@ -7,6 +7,7 @@ import {
     Ruler,
     Settings,
     LogOut,
+    CirclePile
 } from "lucide-react";
 
 import { NavLink } from "react-router-dom";
@@ -35,7 +36,7 @@ export default function SidePanel({ onLogout }) {
             {/* Logo */}
             <div className="flex h-20 shrink-0 items-center px-6">
                 <div className="flex min-w-[220px] items-center gap-4">
-                    <Package size={26} className="shrink-0 text-cyan-400" />
+                    <CirclePile size={26} className="shrink-0 text-cyan-400" />
                     <span className="whitespace-nowrap text-lg font-bold opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                         Inventory App
                     </span>
