@@ -12,7 +12,7 @@ export default function DashboardPage() {
     const [isOpen, setIsOpen] = useState(
         () => window.matchMedia("(min-width: 1024px)").matches
     );
-    const [activeTab, setActiveTab] = useState("UOM");
+    const [activeTab, setActiveTab] = useState("Dashboard");
     async function handleLogout() {
         await logout();
         navigate("/login", { replace: true });
