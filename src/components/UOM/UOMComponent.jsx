@@ -32,7 +32,7 @@ export default function UnitsTable() {
                 </div>
 
                 <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-                    <span className="rounded-full bg-slate-800 px-3 py-1 text-sm text-slate-300">
+                    <span className="rounded-full bg-slate-800 px-3 py-1 text-center text-sm text-slate-300">
                         {units.length} units
                     </span>
 
