@@ -13,15 +13,15 @@ import {
 import { NavLink } from "react-router-dom";
 
 const menuItems = [
-    { name: "Dashboard", icon: LayoutDashboard, path: "/dashboard" },
-    { name: "Products", icon: Package, path: "/products" },
-    { name: "Categories", icon: Grid, path: "/categories" },
-    { name: "Brands", icon: Tag, path: "/items" },
-    { name: "UOM", icon: Ruler, path: "/items" },
-    { name: "Settings", icon: Settings, path: "/settings" },
+    { name: "Dashboard", icon: LayoutDashboard },
+    { name: "Products", icon: Package },
+    { name: "Categories", icon: Grid },
+    { name: "Brands", icon: Tag },
+    { name: "UOM", icon: Ruler },
+    { name: "Settings", icon: Settings },
 ];
 
-export default function SidePanel({ onLogout }) {
+export default function SidePanel({ onLogout, activeTab, setActiveTab }) {
     return (
         <aside
             className="
@@ -45,23 +45,22 @@ export default function SidePanel({ onLogout }) {
 
             {/* Navigation */}
             <nav className="flex-1 space-y-2 px-3 pt-4">
-                {menuItems.map(({ name, icon: Icon, path }) => (
-                    <NavLink
+                {menuItems.map(({ name, icon: Icon }) => (
+                    <button
                         key={name}
-                        to={path}
+                        type="button"
                         title={name}
-                        className={({ isActive }) =>
-                            `flex h-12 min-w-[220px] items-center gap-4 rounded-xl px-3 transition-colors ${isActive
-                                ? "bg-cyan-500/15 text-cyan-400"
-                                : "text-slate-400 hover:bg-slate-800 hover:text-white"
-                            }`
-                        }
+                        onClick={() => setActiveTab(name)}
+                        className={`flex h-12 w-full min-w-[220px] items-center gap-4 rounded-xl px-3 transition-colors ${activeTab === name
+                            ? "bg-cyan-500/15 text-cyan-400"
+                            : "text-slate-400 hover:bg-slate-800 hover:text-white"
+                            }`}
                     >
                         <Icon size={22} className="ml-1 shrink-0" />
                         <span className="whitespace-nowrap opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                             {name}
                         </span>
-                    </NavLink>
+                    </button>
                 ))}
             </nav>
 

@@ -1,4 +1,5 @@
 import SidePanel from '../components/SidePanel';
+import UOMComponent from '../components/UOM/UOMComponent';
 import { useState } from "react";
 import { useEffect } from 'react';
 import { useAuth } from "../auth/AuthContext";
@@ -11,6 +12,7 @@ export default function DashboardPage() {
     const [isOpen, setIsOpen] = useState(
         () => window.matchMedia("(min-width: 1024px)").matches
     );
+    const [activeTab, setActiveTab] = useState("UOM");
     async function handleLogout() {
         await logout();
         navigate("/login", { replace: true });
@@ -41,19 +43,28 @@ export default function DashboardPage() {
 
 
             <div className="min-h-screen">
-                <SidePanel isOpen={isOpen} setIsOpen={setIsOpen} onLogout={handleLogout} />
+                <SidePanel setActiveTab={setActiveTab} activeTab={activeTab} onLogout={handleLogout} />
 
                 <main
                     className={`min-h-screen p-6 pt-20 transition-all duration-300 ml-20`}
                 >
-                    <h1 className="text-2xl font-bold text-white">
 
-                        Inventory Dashboard
-                    </h1>
+                    {activeTab === "UOM" && <UOMComponent />}
+                    {activeTab === "Dashboard" &&
+                        <div>
+                            <h1 className="text-2xl font-bold text-white">
 
-                    <p className="text-slate-400">
-                        Inventory management system overview and insights
-                    </p>
+                                Inventory Dashboard
+                            </h1>
+
+                            <p className="text-slate-400">
+                                Inventory management system overview and insights
+                            </p>
+                        </div>
+
+                    }
+
+
 
                 </main>
             </div>
