@@ -48,8 +48,6 @@ export default function DashboardPage() {
                 <main
                     className={`min-h-screen p-6 pt-20 transition-all duration-300 ml-20`}
                 >
-
-                    {activeTab === "UOM" && <UOMComponent />}
                     {activeTab === "Dashboard" &&
                         <div>
                             <h1 className="text-2xl font-bold text-white">
@@ -63,6 +61,60 @@ export default function DashboardPage() {
                         </div>
 
                     }
+                    {activeTab === "Products" &&
+                        <div>
+                            <h1 className="text-2xl font-bold text-white">
+
+                                Inventory Products
+                            </h1>
+
+                            <p className="text-slate-400">
+                                Inventory items displayed in list
+                            </p>
+                        </div>
+
+                    }
+                    {activeTab === "Categories" &&
+                        <div>
+                            <h1 className="text-2xl font-bold text-white">
+
+                                Inventory Categories
+                            </h1>
+
+                            <p className="text-slate-400">
+                                Product Categories
+                            </p>
+                        </div>
+
+                    }
+                    {activeTab === "Brands" &&
+                        <div>
+                            <h1 className="text-2xl font-bold text-white">
+                                Inventory Brands
+                            </h1>
+
+                            <p className="text-slate-400">
+                                Product Brands
+                            </p>
+                        </div>
+
+                    }
+                    {activeTab === "UOM" && <UOMComponent />}
+
+                    {activeTab === "Settings" &&
+                        <div>
+                            <h1 className="text-2xl font-bold text-white">
+
+                                Settings
+                            </h1>
+
+                            <p className="text-slate-400">
+                                Where configs can be changed.
+                            </p>
+                        </div>
+
+                    }
+
 
 
 
