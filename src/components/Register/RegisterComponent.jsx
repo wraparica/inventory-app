@@ -205,6 +205,14 @@ export default function RegisterComponent({ isLoading, onRegister }) {
                     {isLoading ? "Registering..." : "Register"}
                 </Button>
 
+                <Button
+                    type="button"
+                    variant="ghost"
+                    onClick={() => navigate("/login", { replace: true })}
+                >
+                    Login
+                </Button>
+
             </div>
         </form>
     );

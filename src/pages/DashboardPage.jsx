@@ -30,6 +30,17 @@ export default function DashboardPage() {
             mediaQuery.removeEventListener("change", handleBreakpointChange);
         };
     }, []);
+    useEffect(() => {
+        console.log("DashboardPage mounted");
+
+        return () => {
+            console.log("DashboardPage unmounted");
+        };
+    }, []);
+
+    useEffect(() => {
+        console.log("Active tab changed:", activeTab);
+    }, [activeTab]);
     return (
         <div className="relative min-h-screen overflow-hidden bg-[#0F1620] text-slate-100">
 
@@ -114,9 +125,6 @@ export default function DashboardPage() {
                         </div>
 
                     }
-
-
-
 
                 </main>
             </div>

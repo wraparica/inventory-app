@@ -9,9 +9,6 @@ import {
     LogOut,
     CirclePile
 } from "lucide-react";
-
-import { NavLink } from "react-router-dom";
-
 const menuItems = [
     { name: "Dashboard", icon: LayoutDashboard },
     { name: "Products", icon: Package },
