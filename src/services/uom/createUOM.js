@@ -6,7 +6,6 @@ const CURRENCY_BASE_URL = import.meta.env.VITE_API_BASE_URL ||  'https://invento
 
 export async function postUOM(name, symbol, description, token) {
     const url = `${CURRENCY_BASE_URL}/api/uom`;
-    console.log("potatoken", token)
     let response;
     try {
         response = await fetch(url, {

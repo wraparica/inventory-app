@@ -1,7 +1,6 @@
 import SidePanel from '../components/SidePanel';
 import UOMComponent from '../components/UOM/UOMComponent';
 import { useState } from "react";
-import { useEffect } from 'react';
 import { useAuth } from "../auth/AuthContext";
 import { useNavigate } from 'react-router-dom';
 
@@ -9,38 +8,12 @@ import { useNavigate } from 'react-router-dom';
 export default function DashboardPage() {
     const navigate = useNavigate();
     const { logout } = useAuth();
-    const [isOpen, setIsOpen] = useState(
-        () => window.matchMedia("(min-width: 1024px)").matches
-    );
     const [activeTab, setActiveTab] = useState("Dashboard");
     async function handleLogout() {
         await logout();
         navigate("/login", { replace: true });
     }
-    useEffect(() => {
-        const mediaQuery = window.matchMedia("(min-width: 1024px)");
-
-        const handleBreakpointChange = (event) => {
-            setIsOpen(event.matches);
-        };
-
-        mediaQuery.addEventListener("change", handleBreakpointChange);
-
-        return () => {
-            mediaQuery.removeEventListener("change", handleBreakpointChange);
-        };
-    }, []);
-    useEffect(() => {
-        console.log("DashboardPage mounted");
-
-        return () => {
-            console.log("DashboardPage unmounted");
-        };
-    }, []);
-
-    useEffect(() => {
-        console.log("Active tab changed:", activeTab);
-    }, [activeTab]);
+    
     return (
         <div className="relative min-h-screen overflow-hidden bg-[#0F1620] text-slate-100">
 

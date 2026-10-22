@@ -4,15 +4,6 @@ import UOMTableComponent from '../UOM/UOMTableComponent'
 import { useState, useEffect } from "react";
 
 export default function UOMComponent() {
-    console.log("UOMComponent rendered");
-
-    useEffect(() => {
-        console.log("UOMComponent mounted");
-
-        return () => {
-            console.log("UOMComponent unmounted");
-        };
-    }, []);
     const [refreshTrigger, setRefreshTrigger] = useState(0);
     const { data, status, error } = useGetAllUOM(refreshTrigger);
     const handleUOMAdded = () => {

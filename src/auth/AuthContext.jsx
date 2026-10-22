@@ -8,13 +8,9 @@ export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
 
     async function logout() {
-        console.log("Logout function called");
-
         try {
             const result = await logoutUser();
-            console.log("Logout API response:", result);
         } catch (error) {
-            console.error("Logout API failed:", error);
             throw error;
         } finally {
             setAccessToken(null);

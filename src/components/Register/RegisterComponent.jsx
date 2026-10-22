@@ -8,10 +8,12 @@ import {
     validateEmail,
     validatePassword,
 } from '../../utils/validation';
+import { useNavigate } from 'react-router-dom';
 
 import { PasswordRequirements } from '../PasswordRequirements';
 
 export default function RegisterComponent({ isLoading, onRegister }) {
+    const navigate = useNavigate();
     const [form, setForm] = useState({
         username: '',
         email: '',
