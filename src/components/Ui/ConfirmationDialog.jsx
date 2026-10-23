@@ -26,7 +26,7 @@ export function ConfirmationDialog({ unit, onClose, onSuccess }) {
                 <div className="mt-4 flex flex-row gap-3">
                     <Button
                         type="button"
-                        variant="outline"
+                        variant="delete"
                         onClick={() => deleteUOM(unit._id)}
                         className="flex-1"
                     >
@@ -35,7 +35,7 @@ export function ConfirmationDialog({ unit, onClose, onSuccess }) {
 
                     <Button
                         type="button"
-                        variant="ghost"
+                        variant="outline"
                         onClick={onClose}
                         className="flex-1"
                     >

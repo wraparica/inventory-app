@@ -24,6 +24,9 @@ export default function Button({
 
     ghost:
       "px-4 py-3 font-mono text-xs uppercase tracking-widest text-cyan-400 hover:text-cyan-300",
+
+    delete:
+      "border border-red-400/40 bg-red-400/10 px-4 py-3 font-mono text-xs uppercase tracking-widest text-red-400 hover:border-red-400/60 hover:bg-red-400/20 active:scale-[0.97] disabled:hover:bg-red-400/10 sm:px-5",
   };
 
   return (
