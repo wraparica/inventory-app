@@ -1,6 +1,8 @@
-const CURRENCY_BASE_URL = import.meta.env.VITE_API_BASE_URL ||  'https://inventory-app-backend-production-3919.up.railway.app';
+const CURRENCY_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://inventory-app-backend-production-3919.up.railway.app';
 
 //const CURRENCY_BASE_URL = import.meta.env.VITE_API_BASE_URL ||  'http://localhost:5000';
+
+import { setAccessToken } from "./apiFetch";
 
 export async function postLogin(username, password) {
     const url = `${CURRENCY_BASE_URL}/api/login`;
@@ -9,14 +11,17 @@ export async function postLogin(username, password) {
     try {
         response = await fetch(url, {
             method: 'POST',
+            credentials: 'include', // Important: enable cookies
             headers: {
                 'Content-Type': 'application/json',
-            }, body: JSON.stringify({
+            },
+            body: JSON.stringify({
                 username,
                 password,
             }),
         });
-        console.log(response)
+
+        console.log(response);
     } catch {
         throw new Error('Could not reach the inventory server. Is the backend running?');
     }

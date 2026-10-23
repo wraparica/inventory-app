@@ -5,7 +5,7 @@ import FormError from "../Ui/FormError";
 import Button from "../Ui/Button";
 import { LoadingState, ErrorState } from '../../components/StatusStates';
 
-export function AddUOMComponent({ onClose }) {
+export function AddUOMComponent({ onClose, onSuccess }) {
     const { data, status, error, createUOM } = usePost();
     const [form, setForm] = useState({
         name: '',
@@ -87,7 +87,7 @@ export function AddUOMComponent({ onClose }) {
 
     useEffect(() => {
         if (status === 'success') {
-            onClose(true);
+            onSuccess();
         }
     }, [status, useEffect]);
 

@@ -6,7 +6,7 @@ export function useGetAllUOM(refreshTrigger = 0) {
     const [data, setData] = useState(null);
     const [status, setStatus] = useState('idle');
     const [error, setError] = useState(null);
-    const { accessToken } = useAuth();
+    const { accessToken, setAccessToken } = useAuth();
 
     useEffect(() => {
         let cancelled = false;
@@ -21,7 +21,7 @@ export function useGetAllUOM(refreshTrigger = 0) {
             setError(null);
 
             try {
-                const result = await getAllUOM(accessToken);
+                const result = await getAllUOM(accessToken, setAccessToken);
 
                 if (!cancelled) {
                     setData(result);

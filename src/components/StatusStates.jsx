@@ -1,8 +1,8 @@
-export function EmptyState() {
+export function EmptyState({title, description}) {
   return (
-    <div className="rounded-md border border-dashed border-[#253241] px-6 py-12 text-center sm:py-16">
-      <p className="font-mono text-xs uppercase tracking-widest text-slate-500">Standing by</p>
-      <p className="mt-2 text-sm text-slate-400">Add item in inventory now.</p>
+    <div className="rounded-md px-6 py-12 text-center sm:py-16">
+      <p className="font-mono text-xs uppercase tracking-widest text-slate-500">{title}</p>
+      <p className="mt-2 text-sm text-slate-400">{description}</p>
     </div>
   );
 }
