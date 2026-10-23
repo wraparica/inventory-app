@@ -1,7 +1,7 @@
-const CURRENCY_BASE_URL = import.meta.env.VITE_API_BASE_URL ||  'https://inventory-app-backend-production-3919.up.railway.app';
+const INVENTORY_BASE_URL = import.meta.env.VITE_API_BASE_URL ||  'https://inventory-app-backend-production-3919.up.railway.app';
 
 export async function postRegister(email, username, password) {
-    const url = `${CURRENCY_BASE_URL}/api/register`;
+    const url = `${INVENTORY_BASE_URL}/api/register`;
 
     let response;
     try {

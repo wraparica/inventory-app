@@ -6,7 +6,7 @@ export function usePost() {
     const [data, setData] = useState(null);
     const [status, setStatus] = useState('idle'); // idle | loading | success | error
     const [error, setError] = useState(null);
-    const { accessToken } = useAuth();
+    const { accessToken, setAccessToken } = useAuth();
     const createUOM = useCallback(async (name, symbol, description) => {
         if (!name?.trim()) return;
         if (!symbol?.trim()) return;
@@ -15,7 +15,7 @@ export function usePost() {
         setStatus('loading');
         setError(null);
         try {
-            const result = await postUOM(name.trim(), symbol.trim(), description.trim(), accessToken);
+            const result = await postUOM(name.trim(), symbol.trim(), description.trim(), accessToken, setAccessToken);
             setData(result)
             setStatus('success');
         } catch (err) {
