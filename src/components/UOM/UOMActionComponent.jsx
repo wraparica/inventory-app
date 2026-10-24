@@ -1,17 +1,26 @@
 import { useState, useEffect } from 'react';
 import { usePost } from '../../hooks/uom/useCreateUOM'
+import { useEditUOM } from '../../hooks/uom/useEditUOM'
 import TextInput from "../Ui/TextInput";
 import FormError from "../Ui/FormError";
 import Button from "../Ui/Button";
-import { LoadingState, ErrorState } from '../../components/StatusStates';
+import { LoadingState, ErrorState } from '../StatusStates';
 
-export function AddUOMComponent({ onClose, onSuccess }) {
+export function UOMActionComponent({ onClose, onSuccess, unit, mode }) {
     const { data, status, error, createUOM } = usePost();
+    const {
+        data: editData,
+        status: editStatus,
+        error: editError,
+        updateUOM,
+    } = useEditUOM();
     const [form, setForm] = useState({
-        name: '',
-        symbol: '',
-        description: '',
+        name: mode === "edit" ? unit?.name ?? '' : '',
+        symbol: mode === "edit" ? unit?.symbol ?? '' : '',
+        description: mode === "edit" ? unit?.description ?? '' : '',
     });
+
+
     const [errors, setErrors] = useState({});
     const validateField = (name, value) => {
         switch (name) {
@@ -73,11 +82,18 @@ export function AddUOMComponent({ onClose, onSuccess }) {
         if (Object.values(newErrors).some(Boolean)) {
             return;
         }
-        createUOM(
-            form.name.trim(),
-            form.symbol.trim(),
-            form.description
-        );
+
+        const payload = {
+            name: form.name.trim(),
+            symbol: form.symbol.trim(),
+            description: form.description.trim(),
+        };
+
+        if (mode === "create") {
+            createUOM(payload.name, payload.symbol, payload.description);
+        } else if (mode === "edit" && unit?._id) {
+            updateUOM(unit._id, payload.name, payload.symbol, payload.description);
+        }
     };
 
     const isFormValid =
@@ -86,10 +102,10 @@ export function AddUOMComponent({ onClose, onSuccess }) {
         form.description.trim().length > 0;
 
     useEffect(() => {
-        if (status === 'success') {
+        if (status === 'success' || editStatus === 'success') {
             onSuccess();
         }
-    }, [status, useEffect]);
+    }, [status, editStatus, onSuccess]);
 
     return (
         <form onSubmit={handleSubmit} className="form-container">
@@ -100,7 +116,9 @@ export function AddUOMComponent({ onClose, onSuccess }) {
                     aria-labelledby="loading-title"
                     className="relative flex w-full max-w-sm flex-col gap-4 rounded-xl border border-[#253241] bg-[#111A24] px-10 py-8 text-center shadow-2xl"
                 >
-                    <h1 className="font-serif text-3xl text-slate-50 sm:text-2xl">Add UOM</h1>
+                    <h1 className="font-serif text-3xl text-slate-50 sm:text-2xl">
+                        {mode === "edit" ? "Edit UOM" : "Add UOM"}
+                    </h1>
 
                     {/* Name */}
                     <TextInput
@@ -156,7 +174,7 @@ export function AddUOMComponent({ onClose, onSuccess }) {
 
                     {/* Description */}
                     <TextInput
-                        type="description"
+                        type="text"
                         name="description"
                         value={form.description}
                         onChange={handleChange}
@@ -181,10 +199,10 @@ export function AddUOMComponent({ onClose, onSuccess }) {
                         <Button
                             type="submit"
                             variant="outline"
-                            disabled={status === "loading" || !isFormValid}
+                            disabled={status === "loading" || editStatus === "loading" || !isFormValid}
                             className="flex-1"
                         >
-                            Add
+                            {mode === "edit" ? "Update" : "Add"}
                         </Button>
 
                         <Button
@@ -198,11 +216,22 @@ export function AddUOMComponent({ onClose, onSuccess }) {
                     </div>
 
 
-                    {(status === "loading") && <LoadingState />}
+                    {(status === "loading" || editStatus === "loading") &&
+                        <LoadingState message="Loading…" />
+                    }
+
+                    {(editStatus === "loading") &&
+                        <LoadingState message="Loading…" />
+                    }
 
                     {status === "error" && (
                         <ErrorState message={error} />
                     )}
+
+                    {editStatus === "error" && (
+                        <ErrorState message={editError} />
+                    )}
+
 
                 </div>
             </div>

@@ -37,7 +37,7 @@ export default function RegisterPage() {
                 <RegisterComponent isLoading={status === "loading"} onRegister={register} />
                 <div className="mt-6">
 
-                    {(status === "loading") && <LoadingState />}
+                    {(status === "loading") && <LoadingState message="Loading…" />}
 
                     {status === "error" && (
                         <ErrorState message={error} />

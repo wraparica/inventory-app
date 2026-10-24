@@ -1,6 +1,6 @@
 import { Pencil, Trash2 } from "lucide-react";
 import Button from "../Ui/Button";
-import { AddUOMComponent } from "./AddUOMComponent";
+import { UOMActionComponent } from "./UOMActionComponent";
 import { useState } from "react";
 import { EmptyState } from "../StatusStates";
 import { ConfirmationDialog } from "../Ui/ConfirmationDialog";
@@ -8,6 +8,7 @@ import { ConfirmationDialog } from "../Ui/ConfirmationDialog";
 
 export default function UnitsTable({ data, onUOMAdded }) {
     const [showAddUOM, setShowAddUOM] = useState(false);
+    const [showEditUOM, setShowEditUOM] = useState(false);
     const [showDeleteUOM, setShowDeleteUOM] = useState(false);
     const [item, setItem] = useState(null);
     return (
@@ -79,7 +80,10 @@ export default function UnitsTable({ data, onUOMAdded }) {
                                                 type="button"
                                                 aria-label={`Edit ${unit.name}`}
                                                 className="rounded-lg p-2 text-slate-400 hover:bg-slate-700 hover:text-cyan-400"
-                                                onClick={() => console.log("Edit unit:", unit)}
+                                                onClick={() => {
+                                                    setItem(unit);
+                                                    setShowEditUOM(true);
+                                                }}
                                             >
                                                 <Pencil size={16} />
                                             </button>
@@ -91,7 +95,6 @@ export default function UnitsTable({ data, onUOMAdded }) {
                                                     () => {
                                                         setItem(unit);
                                                         setShowDeleteUOM(true);
-
                                                     }
                                                 }
                                             >
@@ -106,25 +109,45 @@ export default function UnitsTable({ data, onUOMAdded }) {
                 }
             </div>
 
-            {(showAddUOM) && <AddUOMComponent
-                    onClose={(created) => {
-                        setShowAddUOM(false);
-                    }}
+            {(showAddUOM) && <UOMActionComponent
+                onClose={(created) => {
+                    setShowAddUOM(false);
+                }}
 
-                    onSuccess={() =>
-                        onUOMAdded()
-                    }
-                />}
+                onSuccess={() =>
+                    onUOMAdded()
+                }
+                mode={"create"}
+                unit={null}
+            />}
 
-                {(showDeleteUOM) && <ConfirmationDialog unit={item}
-                    onClose={() => {
-                        setShowDeleteUOM(false);
-                    }}
+            {(showDeleteUOM) && <ConfirmationDialog unit={item}
+                onClose={() => {
+                    setShowDeleteUOM(false);
+                    setItem(null);
+                }}
 
-                    onSuccess={() =>
-                        onUOMAdded()
-                    }
-                />}
+                onSuccess={() =>
+                    onUOMAdded()
+                }
+
+                title={`Delete ${item.name}`}
+                description="Are you sure you want to delete?"
+            />}
+
+            {(showEditUOM) && <UOMActionComponent
+                onClose={(created) => {
+                    setShowEditUOM(false);
+                    setItem(null);
+                }}
+
+                onSuccess={() =>
+                    onUOMAdded()
+                }
+
+                mode={"edit"}
+                unit={item}
+            />}
         </div>
 
     );

@@ -7,7 +7,7 @@ export function EmptyState({title, description}) {
   );
 }
 
-export function LoadingState() {
+export function LoadingState({ message }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0B1118]/80 backdrop-blur-sm">
       <div className="flex flex-col items-center gap-3 rounded-xl border border-[#253241] bg-[#111A24] px-10 py-8 text-center shadow-2xl">
@@ -17,7 +17,7 @@ export function LoadingState() {
         />
 
         <p className="font-mono text-xs uppercase tracking-widest text-cyan-400">
-            Logging in…
+            {message}
         </p>
     </div>
 </div>

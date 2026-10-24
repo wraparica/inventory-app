@@ -16,7 +16,7 @@ export default function UOMComponent() {
 
             {status === "idle" && <EmptyState />}
 
-            {status === "loading" && <LoadingState />}
+            {(status === "loading") && <LoadingState message="Loading…" />}
 
             {status === "error" && (
                 <ErrorState message={error} />

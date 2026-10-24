@@ -38,7 +38,7 @@ export default function LoginPage() {
                 <LoginComponent isLoading={false} onLogin={login} />
                 <div className="mt-6">
 
-                    {(status === "loading") && <LoadingState />}
+                    {(status === "loading") && <LoadingState message="Logging in…" />}
 
                     {status === "error" && (
                         <ErrorState message={error} />
