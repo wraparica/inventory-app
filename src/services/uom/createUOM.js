@@ -1,12 +1,7 @@
 
 import { authenticatedFetch } from '../apiClient';
+import INVENTORY_BASE_URL from '../apiConfig';
 
-const INVENTORY_BASE_URL =
-    import.meta.env.VITE_API_BASE_URL ||
-    'https://inventory-app-backend-production-3919.up.railway.app';
-
-// const INVENTORY_BASE_URL =
-//     import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 
 export async function postUOM(
     name,
