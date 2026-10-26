@@ -4,8 +4,10 @@ import { CategoryActionComponent } from "./CategoryActionComponent";
 import { useState, useEffect } from "react";
 import { EmptyState, LoadingState, ErrorState } from "../StatusStates";
 import { ConfirmationDialog } from "../Ui/ConfirmationDialog";
-import Switch from "../Ui/Switch";
 import { useDelete } from '../../hooks/category/useDeleteCategory'
+import {
+    Grid,
+} from "lucide-react";
 
 
 export default function UnitsTable({ categories, onCategoryAdded }) {
@@ -15,12 +17,12 @@ export default function UnitsTable({ categories, onCategoryAdded }) {
     const [item, setItem] = useState(null);
 
     const { data, status, error, deleteCategory } = useDelete();
-    
-        useEffect(() => {
-            if (status === 'success') {
-                onCategoryAdded();
-            }
-        }, [status, onCategoryAdded]);
+
+    useEffect(() => {
+        if (status === 'success') {
+            onCategoryAdded();
+        }
+    }, [status, onCategoryAdded]);
     return (
         <div className="w-full overflow-hidden rounded-xl border border-slate-700">
             <div className="flex items-center justify-between border-b border-slate-700 p-5">
@@ -72,8 +74,17 @@ export default function UnitsTable({ categories, onCategoryAdded }) {
                                     key={category._id}
                                     className="transition-colors hover:bg-slate-800/50"
                                 >
-                                    <td className="whitespace-nowrap px-5 py-4 font-medium text-white">
-                                        {category.name}
+                                    <td className="px-5 py-4">
+                                        <div className="flex items-center gap-3">
+                                            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-slate-700 text-cyan-400">
+                                                <Grid size={20} />
+                                            </div>
+                                            <div>
+                                                <p className="font-medium text-slate-100">
+                                                    {category.name}
+                                                </p>
+                                            </div>
+                                        </div>
                                     </td>
                                     <td className="px-5 py-4 text-slate-400">
                                         {category.description}

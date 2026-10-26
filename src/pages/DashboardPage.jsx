@@ -1,6 +1,7 @@
 import SidePanel from '../components/SidePanel';
 import UOMComponent from '../components/UOM/UOMComponent';
 import CategoryComponent from '../components/Category/CategoryComponent';
+import ProductComponent from '../components/Product/ProductComponent';
 import { useState } from "react";
 import { useAuth } from "../auth/AuthContext";
 import { useNavigate } from 'react-router-dom';
@@ -46,19 +47,8 @@ export default function DashboardPage() {
                         </div>
 
                     }
-                    {activeTab === "Products" &&
-                        <div>
-                            <h1 className="text-2xl font-bold text-white">
 
-                                Inventory Products
-                            </h1>
-
-                            <p className="text-slate-400">
-                                Inventory items displayed in list
-                            </p>
-                        </div>
-
-                    }
+                    {activeTab === "Products" && <ProductComponent />}
                     {activeTab === "Categories" && <CategoryComponent />}
                     {activeTab === "Brands" &&
                         <div>

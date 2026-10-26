@@ -1,10 +1,11 @@
-import { Pencil, Trash2 } from "lucide-react";
+import { Pencil, Trash2, Ruler } from "lucide-react";
 import Button from "../Ui/Button";
 import { UOMActionComponent } from "./UOMActionComponent";
 import { useState, useEffect } from "react";
 import { EmptyState, LoadingState, ErrorState } from "../StatusStates";
 import { ConfirmationDialog } from "../Ui/ConfirmationDialog";
 import { useDelete } from '../../hooks/uom/useDeleteUOM'
+
 
 
 export default function UnitsTable({ units, onUOMAdded }) {
@@ -71,8 +72,17 @@ export default function UnitsTable({ units, onUOMAdded }) {
                                     key={unit._id}
                                     className="transition-colors hover:bg-slate-800/50"
                                 >
-                                    <td className="whitespace-nowrap px-5 py-4 font-medium text-white">
-                                        {unit.name}
+                                    <td className="px-5 py-4">
+                                        <div className="flex items-center gap-3">
+                                            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-slate-700 text-cyan-400">
+                                                <Ruler size={20} />
+                                            </div>
+                                            <div>
+                                                <p className="font-medium text-slate-100">
+                                                    {unit.name}
+                                                </p>
+                                            </div>
+                                        </div>
                                     </td>
                                     <td className="px-5 py-4">
                                         <span className="rounded-md border border-cyan-500/20 bg-cyan-500/10 px-2 py-1 font-medium text-cyan-400">
