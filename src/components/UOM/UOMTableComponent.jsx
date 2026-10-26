@@ -1,16 +1,24 @@
 import { Pencil, Trash2 } from "lucide-react";
 import Button from "../Ui/Button";
 import { UOMActionComponent } from "./UOMActionComponent";
-import { useState } from "react";
-import { EmptyState } from "../StatusStates";
+import { useState, useEffect } from "react";
+import { EmptyState, LoadingState, ErrorState } from "../StatusStates";
 import { ConfirmationDialog } from "../Ui/ConfirmationDialog";
+import { useDelete } from '../../hooks/uom/useDeleteUOM'
 
 
-export default function UnitsTable({ data, onUOMAdded }) {
+export default function UnitsTable({ units, onUOMAdded }) {
     const [showAddUOM, setShowAddUOM] = useState(false);
     const [showEditUOM, setShowEditUOM] = useState(false);
     const [showDeleteUOM, setShowDeleteUOM] = useState(false);
     const [item, setItem] = useState(null);
+    const { data, status, error, deleteUOM } = useDelete();
+
+    useEffect(() => {
+        if (status === 'success') {
+            onUOMAdded();
+        }
+    }, [status, onUOMAdded]);
     return (
         <div className="w-full overflow-hidden rounded-xl border border-slate-700">
             <div className="flex items-center justify-between border-b border-slate-700 p-5">
@@ -27,7 +35,7 @@ export default function UnitsTable({ data, onUOMAdded }) {
 
                 <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
                     <span className="rounded-full bg-slate-800 px-3 py-1 text-center text-sm text-slate-300">
-                        {data.length} units
+                        {units.length} units
                     </span>
 
                     <Button
@@ -44,9 +52,9 @@ export default function UnitsTable({ data, onUOMAdded }) {
             </div>
 
             <div className="overflow-x-auto">
-                {data.length === 0 && <EmptyState title="No Units of Measurement Yet" description="You haven't added any units of measurement yet. Add your first UOM to start managing your products accurately." />}
+                {units.length === 0 && <EmptyState title="No Units of Measurement Yet" description="You haven't added any units of measurement yet. Add your first UOM to start managing your products accurately." />}
 
-                {data.length > 0 &&
+                {units.length > 0 &&
                     <table className="w-full text-left text-sm">
                         <thead className="bg-slate-800/70 text-xs uppercase text-slate-400">
                             <tr>
@@ -58,7 +66,7 @@ export default function UnitsTable({ data, onUOMAdded }) {
                         </thead>
 
                         <tbody className="divide-y divide-slate-800">
-                            {data.map((unit) => (
+                            {units.map((unit) => (
                                 <tr
                                     key={unit._id}
                                     className="transition-colors hover:bg-slate-800/50"
@@ -127,9 +135,10 @@ export default function UnitsTable({ data, onUOMAdded }) {
                     setItem(null);
                 }}
 
-                onSuccess={() =>
-                    onUOMAdded()
-                }
+                onAccept={(id) => {
+                    setShowDeleteUOM(false)
+                    deleteUOM(id)
+                }}
 
                 title={`Delete ${item.name}`}
                 description="Are you sure you want to delete?"
@@ -148,6 +157,12 @@ export default function UnitsTable({ data, onUOMAdded }) {
                 mode={"edit"}
                 unit={item}
             />}
+
+            {(status === "loading") && <LoadingState message="Loading…" />}
+
+            {status === "error" && (
+                <ErrorState message={error} />
+            )}
         </div>
 
     );

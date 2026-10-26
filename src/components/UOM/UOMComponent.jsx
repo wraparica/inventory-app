@@ -23,7 +23,7 @@ export default function UOMComponent() {
             )}
 
             {status === "success" && data && (
-                <UOMTableComponent data={data} onUOMAdded={handleUOMAdded} />
+                <UOMTableComponent units={data} onUOMAdded={handleUOMAdded} />
             )}
 
         </div>

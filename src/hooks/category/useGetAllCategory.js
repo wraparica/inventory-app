@@ -1,0 +1,48 @@
+import { useCallback, useState, useEffect } from 'react';
+import { getAllCategory } from '../../services/category/getAllCategory';
+import { useAuth } from '../../auth/AuthContext';
+
+export function useGetAllCategory(refreshTrigger = 0) {
+    const [data, setData] = useState(null);
+    const [status, setStatus] = useState('idle');
+    const [error, setError] = useState(null);
+    const { accessToken, setAccessToken } = useAuth();
+
+    useEffect(() => {
+        let cancelled = false;
+
+        async function loadData() {
+            if (!accessToken) {
+                setStatus('idle');
+                return;
+            }
+
+            setStatus('loading');
+            setError(null);
+
+            try {
+                const result = await getAllCategory(accessToken, setAccessToken);
+
+                if (!cancelled) {
+                    setData(result);
+                    setStatus('success');
+                }
+            } catch (err) {
+                if (!cancelled) {
+                    setError(err.message);
+                    setStatus('error');
+                }
+            }
+        }
+
+        console.log('Fetching Category');
+
+        loadData();
+
+        return () => {
+            cancelled = true;
+        };
+    }, [refreshTrigger, accessToken]);
+
+    return { data, status, error };
+}

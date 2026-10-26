@@ -1,5 +1,6 @@
 import SidePanel from '../components/SidePanel';
 import UOMComponent from '../components/UOM/UOMComponent';
+import CategoryComponent from '../components/Category/CategoryComponent';
 import { useState } from "react";
 import { useAuth } from "../auth/AuthContext";
 import { useNavigate } from 'react-router-dom';
@@ -13,7 +14,7 @@ export default function DashboardPage() {
         await logout();
         navigate("/login", { replace: true });
     }
-    
+
     return (
         <div className="relative min-h-screen overflow-hidden bg-[#0F1620] text-slate-100">
 
@@ -58,19 +59,7 @@ export default function DashboardPage() {
                         </div>
 
                     }
-                    {activeTab === "Categories" &&
-                        <div>
-                            <h1 className="text-2xl font-bold text-white">
-
-                                Inventory Categories
-                            </h1>
-
-                            <p className="text-slate-400">
-                                Product Categories
-                            </p>
-                        </div>
-
-                    }
+                    {activeTab === "Categories" && <CategoryComponent />}
                     {activeTab === "Brands" &&
                         <div>
                             <h1 className="text-2xl font-bold text-white">

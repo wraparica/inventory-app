@@ -1,15 +1,7 @@
-import { useState, useEffect } from 'react';
 import Button from "../Ui/Button";
-import { LoadingState, ErrorState } from '../../components/StatusStates';
-import { useDelete } from '../../hooks/uom/useDeleteUOM'
 
-export function ConfirmationDialog({ unit, onClose, onSuccess, title, description }) {
-    const { data, status, error, deleteUOM } = useDelete();
-    useEffect(() => {
-        if (status === 'success') {
-            onSuccess();
-        }
-    }, [status, onSuccess]);
+export function ConfirmationDialog({ unit, onClose, onAccept, title, description }) {
+    
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0B1118]/80 p-4 backdrop-blur-sm">
             <div
@@ -27,7 +19,7 @@ export function ConfirmationDialog({ unit, onClose, onSuccess, title, descriptio
                     <Button
                         type="button"
                         variant="delete"
-                        onClick={() => deleteUOM(unit._id)}
+                        onClick={() => onAccept(unit._id)}
                         className="flex-1"
                     >
                         Delete
@@ -42,14 +34,6 @@ export function ConfirmationDialog({ unit, onClose, onSuccess, title, descriptio
                         Cancel
                     </Button>
                 </div>
-
-
-                {(status === "loading") && <LoadingState message="Loading…" />}
-
-                {status === "error" && (
-                    <ErrorState message={error} />
-                )}
-
             </div>
         </div>
     );
